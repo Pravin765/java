@@ -1,0 +1,132 @@
+@echo off
+set "ROOT=%USERPROFILE%\Desktop\AJT_Practicals"
+if exist "%USERPROFILE%\OneDrive\Desktop" set "ROOT=%USERPROFILE%\OneDrive\Desktop\AJT_Practicals"
+set "P=%ROOT%\prac8a_hibernate_emp"
+mkdir "%P%\src\main\resources" 2>nul
+mkdir "%P%\src\main\java\mypack" 2>nul
+>"%P%\pom.xml" echo ^<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"^>
+>>"%P%\pom.xml" echo   ^<modelVersion^>4.0.0^</modelVersion^>
+>>"%P%\pom.xml" echo   ^<groupId^>com.bnn^</groupId^>
+>>"%P%\pom.xml" echo   ^<artifactId^>prac8a_hibernate_emp^</artifactId^>
+>>"%P%\pom.xml" echo   ^<version^>1.0^</version^>
+>>"%P%\pom.xml" echo   ^<packaging^>jar^</packaging^>
+>>"%P%\pom.xml" echo   ^<properties^>
+>>"%P%\pom.xml" echo     ^<maven.compiler.source^>1.8^</maven.compiler.source^>
+>>"%P%\pom.xml" echo     ^<maven.compiler.target^>1.8^</maven.compiler.target^>
+>>"%P%\pom.xml" echo     ^<exec.mainClass^>mypack.store^</exec.mainClass^>
+>>"%P%\pom.xml" echo     ^<project.build.sourceEncoding^>UTF-8^</project.build.sourceEncoding^>
+>>"%P%\pom.xml" echo   ^</properties^>
+>>"%P%\pom.xml" echo   ^<dependencies^>
+>>"%P%\pom.xml" echo     ^<dependency^>
+>>"%P%\pom.xml" echo       ^<groupId^>org.hibernate^</groupId^>
+>>"%P%\pom.xml" echo       ^<artifactId^>hibernate-core^</artifactId^>
+>>"%P%\pom.xml" echo       ^<version^>5.4.33.Final^</version^>
+>>"%P%\pom.xml" echo     ^</dependency^>
+>>"%P%\pom.xml" echo     ^<dependency^>
+>>"%P%\pom.xml" echo       ^<groupId^>mysql^</groupId^>
+>>"%P%\pom.xml" echo       ^<artifactId^>mysql-connector-java^</artifactId^>
+>>"%P%\pom.xml" echo       ^<version^>5.1.49^</version^>
+>>"%P%\pom.xml" echo     ^</dependency^>
+>>"%P%\pom.xml" echo   ^</dependencies^>
+>>"%P%\pom.xml" echo   ^<build^>
+>>"%P%\pom.xml" echo     ^<finalName^>prac8a_hibernate_emp^</finalName^>
+>>"%P%\pom.xml" echo   ^</build^>
+>>"%P%\pom.xml" echo ^</project^>
+>"%P%\src\main\resources\emp.hbm.xml" echo ^<?xml version="1.0" encoding="UTF-8"?^>
+>>"%P%\src\main\resources\emp.hbm.xml" echo ^<!DOCTYPE hibernate-mapping PUBLIC
+>>"%P%\src\main\resources\emp.hbm.xml" echo   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+>>"%P%\src\main\resources\emp.hbm.xml" echo   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"^>
+>>"%P%\src\main\resources\emp.hbm.xml" echo ^<hibernate-mapping^>
+>>"%P%\src\main\resources\emp.hbm.xml" echo   ^<class name="mypack.employee"^>
+>>"%P%\src\main\resources\emp.hbm.xml" echo     ^<id name="id" column="id"^>
+>>"%P%\src\main\resources\emp.hbm.xml" echo        ^<generator class="assigned"^>^</generator^>
+>>"%P%\src\main\resources\emp.hbm.xml" echo     ^</id^>
+>>"%P%\src\main\resources\emp.hbm.xml" echo     ^<property name="fname" column="firstname"^>^</property^>
+>>"%P%\src\main\resources\emp.hbm.xml" echo     ^<property name="lname" column="lastname"^>^</property^>
+>>"%P%\src\main\resources\emp.hbm.xml" echo   ^</class^>
+>>"%P%\src\main\resources\emp.hbm.xml" echo ^</hibernate-mapping^>
+>"%P%\src\main\resources\hibernate.cfg.xml" echo ^<?xml version="1.0" encoding="UTF-8"?^>
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo ^<!DOCTYPE hibernate-configuration PUBLIC
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo     "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"^>
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo ^<hibernate-configuration^>
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo ^<!--
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo   DATABASE (MySQL 5.5 command line): mysql -u root -p
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo   Hibernate/JPA creates the TABLES by itself (hbm2ddl update) and the database is
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo   auto-created by createDatabaseIfNotExist=true. Optional manual step at the mysql^> prompt:
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo.
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo    CREATE DATABASE IF NOT EXISTS hibernatedb;
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo    USE hibernatedb;
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo.
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo   After running the application, check the data with:
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo    USE hibernatedb;  SELECT * FROM employee;
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo.
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo   Connection string used (hard coded below):  jdbc:mysql://localhost:3306/hibernatedb
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo   user: root   password: system
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo --^>
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo   ^<session-factory^>
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo     ^<property name="hibernate.dialect"^>org.hibernate.dialect.MySQL55Dialect^</property^>
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo     ^<property name="hibernate.connection.driver_class"^>com.mysql.jdbc.Driver^</property^>
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo     ^<property name="hibernate.connection.url"^>jdbc:mysql://localhost:3306/hibernatedb?createDatabaseIfNotExist=true^&amp;useSSL=false^&amp;serverTimezone=UTC^</property^>
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo     ^<property name="hibernate.connection.username"^>root^</property^>
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo     ^<property name="hibernate.connection.password"^>system^</property^>
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo     ^<property name="hibernate.hbm2ddl.auto"^>update^</property^>
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo     ^<property name="hibernate.show_sql"^>true^</property^>
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo     ^<mapping resource="emp.hbm.xml"/^>
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo   ^</session-factory^>
+>>"%P%\src\main\resources\hibernate.cfg.xml" echo ^</hibernate-configuration^>
+>"%P%\src\main\java\mypack\employee.java" echo package mypack;
+>>"%P%\src\main\java\mypack\employee.java" echo.
+>>"%P%\src\main\java\mypack\employee.java" echo public class employee {
+>>"%P%\src\main\java\mypack\employee.java" echo     private int id;
+>>"%P%\src\main\java\mypack\employee.java" echo     private String fname, lname;
+>>"%P%\src\main\java\mypack\employee.java" echo.
+>>"%P%\src\main\java\mypack\employee.java" echo     public int getId() {
+>>"%P%\src\main\java\mypack\employee.java" echo         return id;
+>>"%P%\src\main\java\mypack\employee.java" echo     }
+>>"%P%\src\main\java\mypack\employee.java" echo     public void setId(int id) {
+>>"%P%\src\main\java\mypack\employee.java" echo         this.id = id;
+>>"%P%\src\main\java\mypack\employee.java" echo     }
+>>"%P%\src\main\java\mypack\employee.java" echo     public String getFname() {
+>>"%P%\src\main\java\mypack\employee.java" echo         return fname;
+>>"%P%\src\main\java\mypack\employee.java" echo     }
+>>"%P%\src\main\java\mypack\employee.java" echo     public void setFname(String fname) {
+>>"%P%\src\main\java\mypack\employee.java" echo         this.fname = fname;
+>>"%P%\src\main\java\mypack\employee.java" echo     }
+>>"%P%\src\main\java\mypack\employee.java" echo     public String getLname() {
+>>"%P%\src\main\java\mypack\employee.java" echo         return lname;
+>>"%P%\src\main\java\mypack\employee.java" echo     }
+>>"%P%\src\main\java\mypack\employee.java" echo     public void setLname(String lname) {
+>>"%P%\src\main\java\mypack\employee.java" echo         this.lname = lname;
+>>"%P%\src\main\java\mypack\employee.java" echo     }
+>>"%P%\src\main\java\mypack\employee.java" echo }
+>"%P%\src\main\java\mypack\store.java" echo package mypack;
+>>"%P%\src\main\java\mypack\store.java" echo.
+>>"%P%\src\main\java\mypack\store.java" echo import org.hibernate.cfg.Configuration;
+>>"%P%\src\main\java\mypack\store.java" echo import org.hibernate.SessionFactory;
+>>"%P%\src\main\java\mypack\store.java" echo import org.hibernate.Transaction;
+>>"%P%\src\main\java\mypack\store.java" echo import org.hibernate.Session;
+>>"%P%\src\main\java\mypack\store.java" echo.
+>>"%P%\src\main\java\mypack\store.java" echo public class store {
+>>"%P%\src\main\java\mypack\store.java" echo     public static void main(String[] args) {
+>>"%P%\src\main\java\mypack\store.java" echo         Configuration cfg1 = new Configuration().configure("hibernate.cfg.xml");
+>>"%P%\src\main\java\mypack\store.java" echo         SessionFactory s = cfg1.buildSessionFactory();
+>>"%P%\src\main\java\mypack\store.java" echo         Session s1 = s.openSession();
+>>"%P%\src\main\java\mypack\store.java" echo         Transaction t = s1.beginTransaction();
+>>"%P%\src\main\java\mypack\store.java" echo         employee e = new employee();
+>>"%P%\src\main\java\mypack\store.java" echo         e.setId(2);
+>>"%P%\src\main\java\mypack\store.java" echo         e.setFname("abc");
+>>"%P%\src\main\java\mypack\store.java" echo         e.setLname("xyz");
+>>"%P%\src\main\java\mypack\store.java" echo         s1.save(e);
+>>"%P%\src\main\java\mypack\store.java" echo         t.commit();
+>>"%P%\src\main\java\mypack\store.java" echo         employee r = s1.get(employee.class, 2);
+>>"%P%\src\main\java\mypack\store.java" echo         System.out.println("Retrieved: " + r.getId() + " " + r.getFname() + " " + r.getLname());
+>>"%P%\src\main\java\mypack\store.java" echo         s1.close();
+>>"%P%\src\main\java\mypack\store.java" echo         s.close();
+>>"%P%\src\main\java\mypack\store.java" echo     }
+>>"%P%\src\main\java\mypack\store.java" echo }
+cd /d "%P%"
+echo.
+echo Project created in %P%
+echo Now in NetBeans: File - Open Project - select this folder, then right-click - Run
+@echo on

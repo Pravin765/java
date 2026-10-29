@@ -1,0 +1,207 @@
+@echo off
+set "ROOT=%USERPROFILE%\Desktop\AJT_Practicals"
+if exist "%USERPROFILE%\OneDrive\Desktop" set "ROOT=%USERPROFILE%\OneDrive\Desktop\AJT_Practicals"
+set "P=%ROOT%\prac9a_jpa_guestbook"
+mkdir "%P%\src\main\resources\META-INF" 2>nul
+mkdir "%P%\src\main\java\asif" 2>nul
+mkdir "%P%\src\main\webapp" 2>nul
+>"%P%\pom.xml" echo ^<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"^>
+>>"%P%\pom.xml" echo   ^<modelVersion^>4.0.0^</modelVersion^>
+>>"%P%\pom.xml" echo   ^<groupId^>com.bnn^</groupId^>
+>>"%P%\pom.xml" echo   ^<artifactId^>prac9a_jpa_guestbook^</artifactId^>
+>>"%P%\pom.xml" echo   ^<version^>1.0^</version^>
+>>"%P%\pom.xml" echo   ^<packaging^>war^</packaging^>
+>>"%P%\pom.xml" echo   ^<properties^>
+>>"%P%\pom.xml" echo     ^<maven.compiler.source^>1.8^</maven.compiler.source^>
+>>"%P%\pom.xml" echo     ^<maven.compiler.target^>1.8^</maven.compiler.target^>
+>>"%P%\pom.xml" echo     ^<failOnMissingWebXml^>false^</failOnMissingWebXml^>
+>>"%P%\pom.xml" echo     ^<project.build.sourceEncoding^>UTF-8^</project.build.sourceEncoding^>
+>>"%P%\pom.xml" echo   ^</properties^>
+>>"%P%\pom.xml" echo   ^<dependencies^>
+>>"%P%\pom.xml" echo     ^<dependency^>
+>>"%P%\pom.xml" echo       ^<groupId^>javax^</groupId^>
+>>"%P%\pom.xml" echo       ^<artifactId^>javaee-web-api^</artifactId^>
+>>"%P%\pom.xml" echo       ^<version^>8.0^</version^>
+>>"%P%\pom.xml" echo       ^<scope^>provided^</scope^>
+>>"%P%\pom.xml" echo     ^</dependency^>
+>>"%P%\pom.xml" echo     ^<dependency^>
+>>"%P%\pom.xml" echo       ^<groupId^>org.hibernate^</groupId^>
+>>"%P%\pom.xml" echo       ^<artifactId^>hibernate-core^</artifactId^>
+>>"%P%\pom.xml" echo       ^<version^>5.4.33.Final^</version^>
+>>"%P%\pom.xml" echo     ^</dependency^>
+>>"%P%\pom.xml" echo     ^<dependency^>
+>>"%P%\pom.xml" echo       ^<groupId^>mysql^</groupId^>
+>>"%P%\pom.xml" echo       ^<artifactId^>mysql-connector-java^</artifactId^>
+>>"%P%\pom.xml" echo       ^<version^>5.1.49^</version^>
+>>"%P%\pom.xml" echo     ^</dependency^>
+>>"%P%\pom.xml" echo   ^</dependencies^>
+>>"%P%\pom.xml" echo   ^<build^>
+>>"%P%\pom.xml" echo     ^<finalName^>prac9a_jpa_guestbook^</finalName^>
+>>"%P%\pom.xml" echo   ^</build^>
+>>"%P%\pom.xml" echo ^</project^>
+>"%P%\src\main\resources\META-INF\persistence.xml" echo ^<?xml version="1.0" encoding="UTF-8"?^>
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo ^<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"^>
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo ^<!--
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo   DATABASE (MySQL 5.5 command line): mysql -u root -p
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo   Hibernate/JPA creates the TABLES by itself (hbm2ddl update) and the database is
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo   auto-created by createDatabaseIfNotExist=true. Optional manual step at the mysql^> prompt:
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo.
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo    CREATE DATABASE IF NOT EXISTS guestbookdb;
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo    USE guestbookdb;
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo.
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo   After running the application, check the data with:
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo    USE guestbookdb;  SELECT * FROM guestbook;
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo.
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo   Connection string used (hard coded below):  jdbc:mysql://localhost:3306/guestbookdb
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo   user: root   password: system
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo --^>
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo   ^<persistence-unit name="JPAApplication1PU" transaction-type="RESOURCE_LOCAL"^>
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo     ^<provider^>org.hibernate.jpa.HibernatePersistenceProvider^</provider^>
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo     ^<class^>asif.GuestBook^</class^>
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo     ^<exclude-unlisted-classes^>true^</exclude-unlisted-classes^>
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo     ^<properties^>
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo       ^<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/^>
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo       ^<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/guestbookdb?createDatabaseIfNotExist=true&amp;useSSL=false&amp;serverTimezone=UTC"/^>
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo       ^<property name="javax.persistence.jdbc.user" value="root"/^>
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo       ^<property name="javax.persistence.jdbc.password" value="system"/^>
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo       ^<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL55Dialect"/^>
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo       ^<property name="hibernate.hbm2ddl.auto" value="update"/^>
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo       ^<property name="hibernate.show_sql" value="true"/^>
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo     ^</properties^>
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo   ^</persistence-unit^>
+>>"%P%\src\main\resources\META-INF\persistence.xml" echo ^</persistence^>
+>"%P%\src\main\java\asif\GuestBook.java" echo package asif;
+>>"%P%\src\main\java\asif\GuestBook.java" echo.
+>>"%P%\src\main\java\asif\GuestBook.java" echo import javax.persistence.*;
+>>"%P%\src\main\java\asif\GuestBook.java" echo.
+>>"%P%\src\main\java\asif\GuestBook.java" echo @Entity
+>>"%P%\src\main\java\asif\GuestBook.java" echo @Table(name = "GuestBook")
+>>"%P%\src\main\java\asif\GuestBook.java" echo public class GuestBook {
+>>"%P%\src\main\java\asif\GuestBook.java" echo     @Id
+>>"%P%\src\main\java\asif\GuestBook.java" echo     @GeneratedValue(strategy = GenerationType.IDENTITY)
+>>"%P%\src\main\java\asif\GuestBook.java" echo     @Column(name = "VisitorNo", unique = true, updatable = false)
+>>"%P%\src\main\java\asif\GuestBook.java" echo     private Integer visitorNo;
+>>"%P%\src\main\java\asif\GuestBook.java" echo     @Column(name = "VisitorName")
+>>"%P%\src\main\java\asif\GuestBook.java" echo     private String visitorName;
+>>"%P%\src\main\java\asif\GuestBook.java" echo     @Column(name = "Message")
+>>"%P%\src\main\java\asif\GuestBook.java" echo     private String message;
+>>"%P%\src\main\java\asif\GuestBook.java" echo     @Column(name = "MessageDate")
+>>"%P%\src\main\java\asif\GuestBook.java" echo     private String messageDate;
+>>"%P%\src\main\java\asif\GuestBook.java" echo.
+>>"%P%\src\main\java\asif\GuestBook.java" echo     public GuestBook() {
+>>"%P%\src\main\java\asif\GuestBook.java" echo     }
+>>"%P%\src\main\java\asif\GuestBook.java" echo     public Integer getVisitorNo() {
+>>"%P%\src\main\java\asif\GuestBook.java" echo         return visitorNo;
+>>"%P%\src\main\java\asif\GuestBook.java" echo     }
+>>"%P%\src\main\java\asif\GuestBook.java" echo     public void setVisitorNo(Integer visitorNo) {
+>>"%P%\src\main\java\asif\GuestBook.java" echo         this.visitorNo = visitorNo;
+>>"%P%\src\main\java\asif\GuestBook.java" echo     }
+>>"%P%\src\main\java\asif\GuestBook.java" echo     public String getVisitorName() {
+>>"%P%\src\main\java\asif\GuestBook.java" echo         return visitorName;
+>>"%P%\src\main\java\asif\GuestBook.java" echo     }
+>>"%P%\src\main\java\asif\GuestBook.java" echo     public void setVisitorName(String visitorName) {
+>>"%P%\src\main\java\asif\GuestBook.java" echo         this.visitorName = visitorName;
+>>"%P%\src\main\java\asif\GuestBook.java" echo     }
+>>"%P%\src\main\java\asif\GuestBook.java" echo     public String getMessage() {
+>>"%P%\src\main\java\asif\GuestBook.java" echo         return message;
+>>"%P%\src\main\java\asif\GuestBook.java" echo     }
+>>"%P%\src\main\java\asif\GuestBook.java" echo     public void setMessage(String message) {
+>>"%P%\src\main\java\asif\GuestBook.java" echo         this.message = message;
+>>"%P%\src\main\java\asif\GuestBook.java" echo     }
+>>"%P%\src\main\java\asif\GuestBook.java" echo     public String getMessageDate() {
+>>"%P%\src\main\java\asif\GuestBook.java" echo         return messageDate;
+>>"%P%\src\main\java\asif\GuestBook.java" echo     }
+>>"%P%\src\main\java\asif\GuestBook.java" echo     public void setMessageDate(String messageDate) {
+>>"%P%\src\main\java\asif\GuestBook.java" echo         this.messageDate = messageDate;
+>>"%P%\src\main\java\asif\GuestBook.java" echo     }
+>>"%P%\src\main\java\asif\GuestBook.java" echo }
+>"%P%\src\main\webapp\index.jsp" echo ^<%@page contentType="text/html" pageEncoding="UTF-8"%^>
+>>"%P%\src\main\webapp\index.jsp" echo ^<!DOCTYPE html^>
+>>"%P%\src\main\webapp\index.jsp" echo ^<html^>
+>>"%P%\src\main\webapp\index.jsp" echo     ^<body style="background-color: pink;"^>
+>>"%P%\src\main\webapp\index.jsp" echo         Sign the Guest Book
+>>"%P%\src\main\webapp\index.jsp" echo         ^<form action="GuestBookView.jsp" method="post"^>
+>>"%P%\src\main\webapp\index.jsp" echo           Visitor Name:
+>>"%P%\src\main\webapp\index.jsp" echo           ^<input name="guest" maxlength="25" size="50" /^>
+>>"%P%\src\main\webapp\index.jsp" echo           Message:
+>>"%P%\src\main\webapp\index.jsp" echo           ^<textarea rows="5" cols="36" name="message"^>^</textarea^>
+>>"%P%\src\main\webapp\index.jsp" echo           ^<input type="submit" name="btnSubmit" value="Submit" /^>
+>>"%P%\src\main\webapp\index.jsp" echo         ^</form^>
+>>"%P%\src\main\webapp\index.jsp" echo     ^</body^>
+>>"%P%\src\main\webapp\index.jsp" echo ^</html^>
+>"%P%\src\main\webapp\GuestBookView.jsp" echo ^<%@page import="java.util.*, javax.persistence.*, asif.GuestBook" %^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo ^<%@page contentType="text/html" pageEncoding="UTF-8"%^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo ^<!DOCTYPE html^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo ^<html^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo   ^<%!
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     private EntityManagerFactory entityManagerFactory;
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     private EntityManager entityManager;
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     private EntityTransaction entityTransaction;
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     List^<GuestBook^> guestbook;
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo   %^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo   ^<%
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     entityManagerFactory = Persistence.createEntityManagerFactory("JPAApplication1PU");
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     entityManager = entityManagerFactory.createEntityManager();
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     String submit = request.getParameter("btnSubmit");
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     if (submit != null ^&^& ("Submit").equals(submit)) {
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo         try {
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo             String guest = request.getParameter("guest");
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo             String message = request.getParameter("message");
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo             String messageDate = new java.util.Date().toString();
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo             GuestBook gb = new GuestBook();
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo             gb.setVisitorName(guest);
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo             gb.setMessage(message);
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo             gb.setMessageDate(messageDate);
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo             entityTransaction = entityManager.getTransaction();
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo             entityTransaction.begin();
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo             entityManager.persist(gb);
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo             entityTransaction.commit();
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo         } catch (RuntimeException e) {
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo             if (entityTransaction != null ^&^& entityTransaction.isActive()) {
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo                 entityTransaction.rollback();
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo             }
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo             throw e;
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo         }
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo         entityManager.close();
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo         entityManagerFactory.close();
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo         response.sendRedirect("GuestBookView.jsp");
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo         return;
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     }
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     try {
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo         guestbook = entityManager
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo                 .createQuery("SELECT g FROM GuestBook g", GuestBook.class)
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo                 .getResultList();
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     } catch (RuntimeException e) {
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo         guestbook = new ArrayList^<GuestBook^>();
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     } finally {
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo         entityManager.close();
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo         entityManagerFactory.close();
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     }
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo   %^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo   ^<body^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     ^<h2^>View the Guest Book^</h2^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     ^<p^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo        ^<b^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo            ^<a href="index.jsp"^>Click here to sign the guestbook.^</a^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo        ^</b^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     ^</p^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     ^<hr^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     ^<%
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo        Iterator^<GuestBook^> iterator = guestbook.iterator();
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo        while (iterator.hasNext()) {
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo            GuestBook obj = iterator.next();
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     %^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo        On ^<%= obj.getMessageDate() %^>,^<br^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo        ^<b^>^<%= obj.getVisitorName() %^>:^</b^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo        ^<%= obj.getMessage() %^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo        ^<br^>^<br^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     ^<%
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo        }
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo     %^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo   ^</body^>
+>>"%P%\src\main\webapp\GuestBookView.jsp" echo ^</html^>
+cd /d "%P%"
+echo.
+echo Project created in %P%
+echo Now in NetBeans: File - Open Project - select this folder, then right-click - Run
+@echo on

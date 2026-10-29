@@ -1,0 +1,226 @@
+@echo off
+set "ROOT=%USERPROFILE%\Desktop\AJT_Practicals"
+if exist "%USERPROFILE%\OneDrive\Desktop" set "ROOT=%USERPROFILE%\OneDrive\Desktop\AJT_Practicals"
+set "P=%ROOT%\prac9b_student_feedback"
+echo --- Part 2 of 4 ---
+>>"%P%\src\main\webapp\feedback-list.jsp" echo                         ^<td^>^<c:out value="${f.course}"/^>^</td^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo                         ^<td^>^<c:out value="${f.rating}"/^> / 5^</td^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo                         ^<td^>^<c:out value="${f.message}"/^>^</td^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo                         ^<td^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo                           ^<fmt:formatDate
+>>"%P%\src\main\webapp\feedback-list.jsp" echo                                value="${f.submittedAt}"
+>>"%P%\src\main\webapp\feedback-list.jsp" echo                                pattern="dd-MM-yyyy HH:mm"/^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo                         ^</td^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo                    ^</tr^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo                 ^</c:forEach^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo             ^</tbody^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo          ^</table^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo        ^</div^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo     ^</c:otherwise^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo   ^</c:choose^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo   ^<div class="actions"^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo     ^<a class="btn" href="feedback.html"^>Give Feedback^</a^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo     ^<a class="btn secondary" href="index.html"^>Back to Home^</a^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo     ^</div^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo ^</main^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo ^</body^>
+>>"%P%\src\main\webapp\feedback-list.jsp" echo ^</html^>
+>"%P%\src\main\webapp\css\style.css" echo *{
+>>"%P%\src\main\webapp\css\style.css" echo     box-sizing: border-box;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo body {
+>>"%P%\src\main\webapp\css\style.css" echo     margin: 0;
+>>"%P%\src\main\webapp\css\style.css" echo     font-family: Arial, sans-serif;
+>>"%P%\src\main\webapp\css\style.css" echo     background: #f4f7fc;
+>>"%P%\src\main\webapp\css\style.css" echo     color: #253047;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .navbar {
+>>"%P%\src\main\webapp\css\style.css" echo     display: flex;
+>>"%P%\src\main\webapp\css\style.css" echo     justify-content: space-between;
+>>"%P%\src\main\webapp\css\style.css" echo     align-items: center;
+>>"%P%\src\main\webapp\css\style.css" echo     flex-wrap: wrap;
+>>"%P%\src\main\webapp\css\style.css" echo     gap: 16px;
+>>"%P%\src\main\webapp\css\style.css" echo     padding: 20px 7%;
+>>"%P%\src\main\webapp\css\style.css" echo     background: #142d4e;
+>>"%P%\src\main\webapp\css\style.css" echo     color: white;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .logo {
+>>"%P%\src\main\webapp\css\style.css" echo     font-size: 22px;
+>>"%P%\src\main\webapp\css\style.css" echo     font-weight: bold;
+>>"%P%\src\main\webapp\css\style.css" echo     color: white;
+>>"%P%\src\main\webapp\css\style.css" echo     text-decoration: none;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo nav {
+>>"%P%\src\main\webapp\css\style.css" echo     display: flex;
+>>"%P%\src\main\webapp\css\style.css" echo     flex-wrap: wrap;
+>>"%P%\src\main\webapp\css\style.css" echo     gap: 22px;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo nav a {
+>>"%P%\src\main\webapp\css\style.css" echo     color: white;
+>>"%P%\src\main\webapp\css\style.css" echo     text-decoration: none;
+>>"%P%\src\main\webapp\css\style.css" echo     font-weight: bold;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo nav a:hover {
+>>"%P%\src\main\webapp\css\style.css" echo     color: #91c8ff;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .hero {
+>>"%P%\src\main\webapp\css\style.css" echo     min-height: 75vh;
+>>"%P%\src\main\webapp\css\style.css" echo     display: flex;
+>>"%P%\src\main\webapp\css\style.css" echo     align-items: center;
+>>"%P%\src\main\webapp\css\style.css" echo     justify-content: center;
+>>"%P%\src\main\webapp\css\style.css" echo     text-align: center;
+>>"%P%\src\main\webapp\css\style.css" echo     padding: 50px 20px;
+>>"%P%\src\main\webapp\css\style.css" echo     background: linear-gradient(135deg, #e5efff, #f8fbff);
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .hero-content {
+>>"%P%\src\main\webapp\css\style.css" echo     max-width: 720px;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .tagline {
+>>"%P%\src\main\webapp\css\style.css" echo     color: #2563eb;
+>>"%P%\src\main\webapp\css\style.css" echo     font-weight: bold;
+>>"%P%\src\main\webapp\css\style.css" echo     letter-spacing: 3px;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo h1 {
+>>"%P%\src\main\webapp\css\style.css" echo     color: #142d4e;
+>>"%P%\src\main\webapp\css\style.css" echo     font-size: 36px;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .hero-content ^> p:not(.tagline) {
+>>"%P%\src\main\webapp\css\style.css" echo     font-size: 18px;
+>>"%P%\src\main\webapp\css\style.css" echo     line-height: 1.7;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .actions {
+>>"%P%\src\main\webapp\css\style.css" echo     display: flex;
+>>"%P%\src\main\webapp\css\style.css" echo     justify-content: center;
+>>"%P%\src\main\webapp\css\style.css" echo     flex-wrap: wrap;
+>>"%P%\src\main\webapp\css\style.css" echo     gap: 12px;
+>>"%P%\src\main\webapp\css\style.css" echo     margin-top: 25px;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .btn {
+>>"%P%\src\main\webapp\css\style.css" echo     display: inline-block;
+>>"%P%\src\main\webapp\css\style.css" echo     padding: 13px 22px;
+>>"%P%\src\main\webapp\css\style.css" echo     border: none;
+>>"%P%\src\main\webapp\css\style.css" echo     border-radius: 7px;
+>>"%P%\src\main\webapp\css\style.css" echo     background: #2563eb;
+>>"%P%\src\main\webapp\css\style.css" echo     color: white;
+>>"%P%\src\main\webapp\css\style.css" echo     font-size: 15px;
+>>"%P%\src\main\webapp\css\style.css" echo     font-weight: bold;
+>>"%P%\src\main\webapp\css\style.css" echo     text-decoration: none;
+>>"%P%\src\main\webapp\css\style.css" echo     text-align: center;
+>>"%P%\src\main\webapp\css\style.css" echo     cursor: pointer;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .btn:hover {
+>>"%P%\src\main\webapp\css\style.css" echo     background: #1749b5;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .btn.secondary {
+>>"%P%\src\main\webapp\css\style.css" echo     background: #142d4e;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .btn.secondary:hover {
+>>"%P%\src\main\webapp\css\style.css" echo     background: #274a76;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .container {
+>>"%P%\src\main\webapp\css\style.css" echo     padding: 40px 16px;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .feedback-card {
+>>"%P%\src\main\webapp\css\style.css" echo     max-width: 540px;
+>>"%P%\src\main\webapp\css\style.css" echo     margin: 0 auto;
+>>"%P%\src\main\webapp\css\style.css" echo     padding: 32px;
+>>"%P%\src\main\webapp\css\style.css" echo     background: white;
+>>"%P%\src\main\webapp\css\style.css" echo     border-radius: 14px;
+>>"%P%\src\main\webapp\css\style.css" echo     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .feedback-card h1 {
+>>"%P%\src\main\webapp\css\style.css" echo     margin-top: 0;
+>>"%P%\src\main\webapp\css\style.css" echo     font-size: 28px;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .muted {
+>>"%P%\src\main\webapp\css\style.css" echo     color: #64748b;
+>>"%P%\src\main\webapp\css\style.css" echo     line-height: 1.6;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo label {
+>>"%P%\src\main\webapp\css\style.css" echo     display: block;
+>>"%P%\src\main\webapp\css\style.css" echo     margin: 18px 0 8px;
+>>"%P%\src\main\webapp\css\style.css" echo     font-weight: bold;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo input,
+>>"%P%\src\main\webapp\css\style.css" echo select,
+>>"%P%\src\main\webapp\css\style.css" echo textarea {
+>>"%P%\src\main\webapp\css\style.css" echo     width: 100%;
+>>"%P%\src\main\webapp\css\style.css" echo     padding: 12px;
+>>"%P%\src\main\webapp\css\style.css" echo     border: 1px solid #cbd5e1;
+>>"%P%\src\main\webapp\css\style.css" echo     border-radius: 6px;
+>>"%P%\src\main\webapp\css\style.css" echo     font: inherit;
+>>"%P%\src\main\webapp\css\style.css" echo     background: white;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo input:focus,
+>>"%P%\src\main\webapp\css\style.css" echo select:focus,
+>>"%P%\src\main\webapp\css\style.css" echo textarea:focus {
+>>"%P%\src\main\webapp\css\style.css" echo     outline: 2px solid #93b8ff;
+>>"%P%\src\main\webapp\css\style.css" echo     border-color: #2563eb;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo textarea {
+>>"%P%\src\main\webapp\css\style.css" echo     resize: vertical;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .full-width {
+>>"%P%\src\main\webapp\css\style.css" echo     width: 100%;
+>>"%P%\src\main\webapp\css\style.css" echo     margin-top: 22px;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .back-link {
+>>"%P%\src\main\webapp\css\style.css" echo     display: block;
+>>"%P%\src\main\webapp\css\style.css" echo     margin-top: 20px;
+>>"%P%\src\main\webapp\css\style.css" echo     text-align: center;
+>>"%P%\src\main\webapp\css\style.css" echo     color: #2563eb;
+>>"%P%\src\main\webapp\css\style.css" echo     text-decoration: none;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .result-card {
+>>"%P%\src\main\webapp\css\style.css" echo     margin-top: 30px;
+>>"%P%\src\main\webapp\css\style.css" echo     text-align: center;
+>>"%P%\src\main\webapp\css\style.css" echo     line-height: 1.7;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .success-icon {
+>>"%P%\src\main\webapp\css\style.css" echo     margin: 0 auto 16px;
+>>"%P%\src\main\webapp\css\style.css" echo     width: 58px;
+>>"%P%\src\main\webapp\css\style.css" echo     height: 58px;
+>>"%P%\src\main\webapp\css\style.css" echo     border-radius: 50%;
+>>"%P%\src\main\webapp\css\style.css" echo     background: #dcfce7;
+>>"%P%\src\main\webapp\css\style.css" echo     color: #15803d;
+>>"%P%\src\main\webapp\css\style.css" echo     font-size: 36px;
+>>"%P%\src\main\webapp\css\style.css" echo     line-height: 58px;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .error-title {
+>>"%P%\src\main\webapp\css\style.css" echo     color: #b91c1c;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .records-container {
+>>"%P%\src\main\webapp\css\style.css" echo     padding: 35px 5%;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .table-wrapper {
+>>"%P%\src\main\webapp\css\style.css" echo     overflow-x: auto;
+>>"%P%\src\main\webapp\css\style.css" echo     margin: 25px 0;
+>>"%P%\src\main\webapp\css\style.css" echo     background: white;
+>>"%P%\src\main\webapp\css\style.css" echo     border-radius: 10px;
+>>"%P%\src\main\webapp\css\style.css" echo     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo table {
+>>"%P%\src\main\webapp\css\style.css" echo     width: 100%;
+>>"%P%\src\main\webapp\css\style.css" echo     border-collapse: collapse;
+>>"%P%\src\main\webapp\css\style.css" echo     background: white;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo th,
+>>"%P%\src\main\webapp\css\style.css" echo td {
+>>"%P%\src\main\webapp\css\style.css" echo     padding: 14px;
+>>"%P%\src\main\webapp\css\style.css" echo     border-bottom: 1px solid #e2e8f0;
+>>"%P%\src\main\webapp\css\style.css" echo     text-align: left;
+>>"%P%\src\main\webapp\css\style.css" echo     vertical-align: top;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo th {
+>>"%P%\src\main\webapp\css\style.css" echo     background: #142d4e;
+>>"%P%\src\main\webapp\css\style.css" echo     color: white;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo tbody tr:hover {
+>>"%P%\src\main\webapp\css\style.css" echo     background: #f1f6ff;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo .message-cell {
+>>"%P%\src\main\webapp\css\style.css" echo     min-width: 180px;
+>>"%P%\src\main\webapp\css\style.css" echo     white-space: pre-wrap;
+>>"%P%\src\main\webapp\css\style.css" echo     overflow-wrap: anywhere;
+>>"%P%\src\main\webapp\css\style.css" echo }
+@echo on

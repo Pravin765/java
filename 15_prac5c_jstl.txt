@@ -1,0 +1,63 @@
+@echo off
+set "ROOT=%USERPROFILE%\Desktop\AJT_Practicals"
+if exist "%USERPROFILE%\OneDrive\Desktop" set "ROOT=%USERPROFILE%\OneDrive\Desktop\AJT_Practicals"
+set "P=%ROOT%\prac5c_jstl"
+mkdir "%P%\src\main\webapp\WEB-INF" 2>nul
+mkdir "%P%\src\main\webapp" 2>nul
+>"%P%\pom.xml" echo ^<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"^>
+>>"%P%\pom.xml" echo   ^<modelVersion^>4.0.0^</modelVersion^>
+>>"%P%\pom.xml" echo   ^<groupId^>com.bnn^</groupId^>
+>>"%P%\pom.xml" echo   ^<artifactId^>prac5c_jstl^</artifactId^>
+>>"%P%\pom.xml" echo   ^<version^>1.0^</version^>
+>>"%P%\pom.xml" echo   ^<packaging^>war^</packaging^>
+>>"%P%\pom.xml" echo   ^<properties^>
+>>"%P%\pom.xml" echo     ^<maven.compiler.source^>1.8^</maven.compiler.source^>
+>>"%P%\pom.xml" echo     ^<maven.compiler.target^>1.8^</maven.compiler.target^>
+>>"%P%\pom.xml" echo     ^<failOnMissingWebXml^>false^</failOnMissingWebXml^>
+>>"%P%\pom.xml" echo     ^<project.build.sourceEncoding^>UTF-8^</project.build.sourceEncoding^>
+>>"%P%\pom.xml" echo   ^</properties^>
+>>"%P%\pom.xml" echo   ^<dependencies^>
+>>"%P%\pom.xml" echo     ^<dependency^>
+>>"%P%\pom.xml" echo       ^<groupId^>javax^</groupId^>
+>>"%P%\pom.xml" echo       ^<artifactId^>javaee-web-api^</artifactId^>
+>>"%P%\pom.xml" echo       ^<version^>8.0^</version^>
+>>"%P%\pom.xml" echo       ^<scope^>provided^</scope^>
+>>"%P%\pom.xml" echo     ^</dependency^>
+>>"%P%\pom.xml" echo     ^<dependency^>
+>>"%P%\pom.xml" echo       ^<groupId^>javax.servlet^</groupId^>
+>>"%P%\pom.xml" echo       ^<artifactId^>jstl^</artifactId^>
+>>"%P%\pom.xml" echo       ^<version^>1.2^</version^>
+>>"%P%\pom.xml" echo     ^</dependency^>
+>>"%P%\pom.xml" echo   ^</dependencies^>
+>>"%P%\pom.xml" echo   ^<build^>
+>>"%P%\pom.xml" echo     ^<finalName^>prac5c_jstl^</finalName^>
+>>"%P%\pom.xml" echo   ^</build^>
+>>"%P%\pom.xml" echo ^</project^>
+>"%P%\src\main\webapp\WEB-INF\web.xml" echo ^<?xml version="1.0" encoding="UTF-8"?^>
+>>"%P%\src\main\webapp\WEB-INF\web.xml" echo ^<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0"^>
+>>"%P%\src\main\webapp\WEB-INF\web.xml" echo   ^<welcome-file-list^>
+>>"%P%\src\main\webapp\WEB-INF\web.xml" echo     ^<welcome-file^>Function.jsp^</welcome-file^>
+>>"%P%\src\main\webapp\WEB-INF\web.xml" echo   ^</welcome-file-list^>
+>>"%P%\src\main\webapp\WEB-INF\web.xml" echo ^</web-app^>
+>"%P%\src\main\webapp\Function.jsp" echo ^<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %^>
+>>"%P%\src\main\webapp\Function.jsp" echo ^<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %^>
+>>"%P%\src\main\webapp\Function.jsp" echo ^<html^>
+>>"%P%\src\main\webapp\Function.jsp" echo ^<body^>
+>>"%P%\src\main\webapp\Function.jsp" echo   ^<c:set var="String" value="Welcome-to-tutorials-point"/^>
+>>"%P%\src\main\webapp\Function.jsp" echo   ^<h3^>
+>>"%P%\src\main\webapp\Function.jsp" echo     contains: ${fn:contains(String, "tutorial")}^<br^>
+>>"%P%\src\main\webapp\Function.jsp" echo     indexOf: ${fn:indexOf(String, "to")}^<br^>
+>>"%P%\src\main\webapp\Function.jsp" echo     replace: ${fn:replace(String, "tutorials", "javat")}^<br^>
+>>"%P%\src\main\webapp\Function.jsp" echo     toLowerCase: ${fn:toLowerCase(String)}^<br^>
+>>"%P%\src\main\webapp\Function.jsp" echo     toUpperCase: ${fn:toUpperCase(String)}^<br^>
+>>"%P%\src\main\webapp\Function.jsp" echo     substring: ${fn:substring(String, 5, 11)}^<br^>
+>>"%P%\src\main\webapp\Function.jsp" echo     substringAfter: ${fn:substringAfter(String, "to")}^<br^>
+>>"%P%\src\main\webapp\Function.jsp" echo     Length of the string is: ${fn:length(String)}
+>>"%P%\src\main\webapp\Function.jsp" echo   ^</h3^>
+>>"%P%\src\main\webapp\Function.jsp" echo ^</body^>
+>>"%P%\src\main\webapp\Function.jsp" echo ^</html^>
+cd /d "%P%"
+echo.
+echo Project created in %P%
+echo Now in NetBeans: File - Open Project - select this folder, then right-click - Run
+@echo on

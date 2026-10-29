@@ -1,0 +1,135 @@
+@echo off
+set "ROOT=%USERPROFILE%\Desktop\AJT_Practicals"
+if exist "%USERPROFILE%\OneDrive\Desktop" set "ROOT=%USERPROFILE%\OneDrive\Desktop\AJT_Practicals"
+set "P=%ROOT%\prac7b_marks"
+mkdir "%P%\src\main\webapp" 2>nul
+mkdir "%P%\src\main\java" 2>nul
+mkdir "%P%\src\main\java\ejb" 2>nul
+>"%P%\pom.xml" echo ^<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"^>
+>>"%P%\pom.xml" echo   ^<modelVersion^>4.0.0^</modelVersion^>
+>>"%P%\pom.xml" echo   ^<groupId^>com.bnn^</groupId^>
+>>"%P%\pom.xml" echo   ^<artifactId^>prac7b_marks^</artifactId^>
+>>"%P%\pom.xml" echo   ^<version^>1.0^</version^>
+>>"%P%\pom.xml" echo   ^<packaging^>war^</packaging^>
+>>"%P%\pom.xml" echo   ^<properties^>
+>>"%P%\pom.xml" echo     ^<maven.compiler.source^>1.8^</maven.compiler.source^>
+>>"%P%\pom.xml" echo     ^<maven.compiler.target^>1.8^</maven.compiler.target^>
+>>"%P%\pom.xml" echo     ^<failOnMissingWebXml^>false^</failOnMissingWebXml^>
+>>"%P%\pom.xml" echo     ^<project.build.sourceEncoding^>UTF-8^</project.build.sourceEncoding^>
+>>"%P%\pom.xml" echo   ^</properties^>
+>>"%P%\pom.xml" echo   ^<dependencies^>
+>>"%P%\pom.xml" echo     ^<dependency^>
+>>"%P%\pom.xml" echo       ^<groupId^>javax^</groupId^>
+>>"%P%\pom.xml" echo       ^<artifactId^>javaee-web-api^</artifactId^>
+>>"%P%\pom.xml" echo       ^<version^>8.0^</version^>
+>>"%P%\pom.xml" echo       ^<scope^>provided^</scope^>
+>>"%P%\pom.xml" echo     ^</dependency^>
+>>"%P%\pom.xml" echo     ^<dependency^>
+>>"%P%\pom.xml" echo       ^<groupId^>mysql^</groupId^>
+>>"%P%\pom.xml" echo       ^<artifactId^>mysql-connector-java^</artifactId^>
+>>"%P%\pom.xml" echo       ^<version^>5.1.49^</version^>
+>>"%P%\pom.xml" echo     ^</dependency^>
+>>"%P%\pom.xml" echo   ^</dependencies^>
+>>"%P%\pom.xml" echo   ^<build^>
+>>"%P%\pom.xml" echo     ^<finalName^>prac7b_marks^</finalName^>
+>>"%P%\pom.xml" echo   ^</build^>
+>>"%P%\pom.xml" echo ^</project^>
+>"%P%\src\main\webapp\index.html" echo ^<!DOCTYPE html^>
+>>"%P%\src\main\webapp\index.html" echo ^<html^>
+>>"%P%\src\main\webapp\index.html" echo  ^<head^>
+>>"%P%\src\main\webapp\index.html" echo   ^<title^>Marks Entry Application^</title^>
+>>"%P%\src\main\webapp\index.html" echo  ^</head^>
+>>"%P%\src\main\webapp\index.html" echo  ^<body^>
+>>"%P%\src\main\webapp\index.html" echo   ^<form action="MarkEntrySrv" method="get"^>
+>>"%P%\src\main\webapp\index.html" echo    Enter Roll No.:
+>>"%P%\src\main\webapp\index.html" echo    ^<input type="text" name="sno"^>^<br^>
+>>"%P%\src\main\webapp\index.html" echo    Enter Student Name:
+>>"%P%\src\main\webapp\index.html" echo    ^<input type="text" name="name"^>^<br^>
+>>"%P%\src\main\webapp\index.html" echo    Enter Marks (EJ):
+>>"%P%\src\main\webapp\index.html" echo    ^<input type="text" name="m1"^>^<br^>
+>>"%P%\src\main\webapp\index.html" echo    Enter Marks (AWP):
+>>"%P%\src\main\webapp\index.html" echo    ^<input type="text" name="m2"^>^<br^>^<br^>
+>>"%P%\src\main\webapp\index.html" echo    ^<input type="submit" value="Submit"^>
+>>"%P%\src\main\webapp\index.html" echo    ^<input type="reset" value="Reset"^>
+>>"%P%\src\main\webapp\index.html" echo   ^</form^>
+>>"%P%\src\main\webapp\index.html" echo  ^</body^>
+>>"%P%\src\main\webapp\index.html" echo ^</html^>
+>"%P%\src\main\java\MarkEntrySrv.java" echo import ejb.MarksEntry;
+>>"%P%\src\main\java\MarkEntrySrv.java" echo import java.io.*;
+>>"%P%\src\main\java\MarkEntrySrv.java" echo import javax.ejb.EJB;
+>>"%P%\src\main\java\MarkEntrySrv.java" echo import javax.servlet.*;
+>>"%P%\src\main\java\MarkEntrySrv.java" echo import javax.servlet.annotation.WebServlet;
+>>"%P%\src\main\java\MarkEntrySrv.java" echo import javax.servlet.http.*;
+>>"%P%\src\main\java\MarkEntrySrv.java" echo.
+>>"%P%\src\main\java\MarkEntrySrv.java" echo @WebServlet("/MarkEntrySrv")
+>>"%P%\src\main\java\MarkEntrySrv.java" echo public class MarkEntrySrv extends HttpServlet {
+>>"%P%\src\main\java\MarkEntrySrv.java" echo     @EJB
+>>"%P%\src\main\java\MarkEntrySrv.java" echo     MarksEntry bean;
+>>"%P%\src\main\java\MarkEntrySrv.java" echo.
+>>"%P%\src\main\java\MarkEntrySrv.java" echo     public void doGet(HttpServletRequest req,
+>>"%P%\src\main\java\MarkEntrySrv.java" echo             HttpServletResponse res)
+>>"%P%\src\main\java\MarkEntrySrv.java" echo             throws IOException, ServletException {
+>>"%P%\src\main\java\MarkEntrySrv.java" echo         res.setContentType("text/html");
+>>"%P%\src\main\java\MarkEntrySrv.java" echo         PrintWriter out = res.getWriter();
+>>"%P%\src\main\java\MarkEntrySrv.java" echo         String id, name, p1, p2;
+>>"%P%\src\main\java\MarkEntrySrv.java" echo         id = req.getParameter("sno");
+>>"%P%\src\main\java\MarkEntrySrv.java" echo         name = req.getParameter("name");
+>>"%P%\src\main\java\MarkEntrySrv.java" echo         p1 = req.getParameter("m1");
+>>"%P%\src\main\java\MarkEntrySrv.java" echo         p2 = req.getParameter("m2");
+>>"%P%\src\main\java\MarkEntrySrv.java" echo         bean.entry(id, name, p1, p2);
+>>"%P%\src\main\java\MarkEntrySrv.java" echo         out.print(bean.submit(name));
+>>"%P%\src\main\java\MarkEntrySrv.java" echo     }
+>>"%P%\src\main\java\MarkEntrySrv.java" echo }
+>"%P%\src\main\java\ejb\MarksEntry.java" echo /*
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo  * DATABASE SETUP (MySQL 5.5 command line)
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo  * 1. Open Command Prompt and run:  mysql -u root -p
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo  * 2. Execute these queries at the mysql^> prompt (run them once):
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo  *
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo  *   CREATE DATABASE IF NOT EXISTS marksdb1;
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo  *   USE marksdb1;
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo  *   CREATE TABLE IF NOT EXISTS student (srno VARCHAR(10), sname VARCHAR(50), ej VARCHAR(5), awp VARCHAR(5));
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo  *
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo  * 3. After running the application, check the data with:
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo  *   SELECT * FROM student;
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo  *
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo  * Connection string used in this project (hard coded):
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo  *   jdbc:mysql://localhost:3306/marksdb1   user: root   password: system
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo  */
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo package ejb;
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo.
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo import java.sql.*;
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo import javax.ejb.Stateless;
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo.
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo @Stateless
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo public class MarksEntry {
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo     public void entry(String srno, String sname,
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo             String p1, String p2) {
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo         try {
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo             Class.forName("com.mysql.jdbc.Driver");
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo             Connection con = DriverManager.getConnection(
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo                  "jdbc:mysql://localhost:3306/marksdb1",
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo                  "root",
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo                  "system"
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo             );
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo             PreparedStatement ps = con.prepareStatement(
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo                  "INSERT INTO student VALUES (?, ?, ?, ?)"
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo             );
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo             ps.setString(1, srno);
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo             ps.setString(2, sname);
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo             ps.setString(3, p1);
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo             ps.setString(4, p2);
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo             ps.executeUpdate();
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo             con.close();
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo         } catch (Exception e) {
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo             System.out.print(e);
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo         }
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo     }
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo     public String submit(String name) {
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo         return "<h1>" + name.toUpperCase() + "<br>Record submitted successfully!!</h1>";
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo     }
+>>"%P%\src\main\java\ejb\MarksEntry.java" echo }
+cd /d "%P%"
+echo.
+echo Project created in %P%
+echo Now in NetBeans: File - Open Project - select this folder, then right-click - Run
+@echo on

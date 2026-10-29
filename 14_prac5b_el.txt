@@ -1,0 +1,55 @@
+@echo off
+set "ROOT=%USERPROFILE%\Desktop\AJT_Practicals"
+if exist "%USERPROFILE%\OneDrive\Desktop" set "ROOT=%USERPROFILE%\OneDrive\Desktop\AJT_Practicals"
+set "P=%ROOT%\prac5b_el"
+mkdir "%P%\src\main\webapp" 2>nul
+>"%P%\pom.xml" echo ^<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"^>
+>>"%P%\pom.xml" echo   ^<modelVersion^>4.0.0^</modelVersion^>
+>>"%P%\pom.xml" echo   ^<groupId^>com.bnn^</groupId^>
+>>"%P%\pom.xml" echo   ^<artifactId^>prac5b_el^</artifactId^>
+>>"%P%\pom.xml" echo   ^<version^>1.0^</version^>
+>>"%P%\pom.xml" echo   ^<packaging^>war^</packaging^>
+>>"%P%\pom.xml" echo   ^<properties^>
+>>"%P%\pom.xml" echo     ^<maven.compiler.source^>1.8^</maven.compiler.source^>
+>>"%P%\pom.xml" echo     ^<maven.compiler.target^>1.8^</maven.compiler.target^>
+>>"%P%\pom.xml" echo     ^<failOnMissingWebXml^>false^</failOnMissingWebXml^>
+>>"%P%\pom.xml" echo     ^<project.build.sourceEncoding^>UTF-8^</project.build.sourceEncoding^>
+>>"%P%\pom.xml" echo   ^</properties^>
+>>"%P%\pom.xml" echo   ^<dependencies^>
+>>"%P%\pom.xml" echo     ^<dependency^>
+>>"%P%\pom.xml" echo       ^<groupId^>javax^</groupId^>
+>>"%P%\pom.xml" echo       ^<artifactId^>javaee-web-api^</artifactId^>
+>>"%P%\pom.xml" echo       ^<version^>8.0^</version^>
+>>"%P%\pom.xml" echo       ^<scope^>provided^</scope^>
+>>"%P%\pom.xml" echo     ^</dependency^>
+>>"%P%\pom.xml" echo   ^</dependencies^>
+>>"%P%\pom.xml" echo   ^<build^>
+>>"%P%\pom.xml" echo     ^<finalName^>prac5b_el^</finalName^>
+>>"%P%\pom.xml" echo   ^</build^>
+>>"%P%\pom.xml" echo ^</project^>
+>"%P%\src\main\webapp\index.jsp" echo ^<html^>
+>>"%P%\src\main\webapp\index.jsp" echo ^<body^>
+>>"%P%\src\main\webapp\index.jsp" echo ^<%
+>>"%P%\src\main\webapp\index.jsp" echo    session.setAttribute("user","Shubham");
+>>"%P%\src\main\webapp\index.jsp" echo    Cookie s=new Cookie("name","Shubh");
+>>"%P%\src\main\webapp\index.jsp" echo    response.addCookie(s);
+>>"%P%\src\main\webapp\index.jsp" echo %^>
+>>"%P%\src\main\webapp\index.jsp" echo      ^<a href="Expression.jsp"^>Visit^</a^>
+>>"%P%\src\main\webapp\index.jsp" echo ^</body^>
+>>"%P%\src\main\webapp\index.jsp" echo ^</html^>
+>"%P%\src\main\webapp\Expression.jsp" echo ^<html^>
+>>"%P%\src\main\webapp\Expression.jsp" echo ^<body^>
+>>"%P%\src\main\webapp\Expression.jsp" echo      ^<h1^>Use of Expression Language^</h1^>^<br^>
+>>"%P%\src\main\webapp\Expression.jsp" echo      ${"Learning Expression"}^<br^>
+>>"%P%\src\main\webapp\Expression.jsp" echo      Expression1:${1^>(4/2)}^<br^>
+>>"%P%\src\main\webapp\Expression.jsp" echo      Expression2:${(10*10) ne 100}^<br^>
+>>"%P%\src\main\webapp\Expression.jsp" echo      ^<h1^>Use of implicit object in Expression Language^</h1^>^<br^>
+>>"%P%\src\main\webapp\Expression.jsp" echo      Expression Language session Scope Object:${sessionScope.user}^<br^>
+>>"%P%\src\main\webapp\Expression.jsp" echo      Expression Language cookie:${cookie.name.value}
+>>"%P%\src\main\webapp\Expression.jsp" echo ^</body^>
+>>"%P%\src\main\webapp\Expression.jsp" echo ^</html^>
+cd /d "%P%"
+echo.
+echo Project created in %P%
+echo Now in NetBeans: File - Open Project - select this folder, then right-click - Run
+@echo on

@@ -1,0 +1,105 @@
+@echo off
+set "ROOT=%USERPROFILE%\Desktop\AJT_Practicals"
+if exist "%USERPROFILE%\OneDrive\Desktop" set "ROOT=%USERPROFILE%\OneDrive\Desktop\AJT_Practicals"
+set "P=%ROOT%\prac2c_session"
+mkdir "%P%\src\main\webapp" 2>nul
+mkdir "%P%\src\main\java" 2>nul
+>"%P%\pom.xml" echo ^<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"^>
+>>"%P%\pom.xml" echo   ^<modelVersion^>4.0.0^</modelVersion^>
+>>"%P%\pom.xml" echo   ^<groupId^>com.bnn^</groupId^>
+>>"%P%\pom.xml" echo   ^<artifactId^>prac2c_session^</artifactId^>
+>>"%P%\pom.xml" echo   ^<version^>1.0^</version^>
+>>"%P%\pom.xml" echo   ^<packaging^>war^</packaging^>
+>>"%P%\pom.xml" echo   ^<properties^>
+>>"%P%\pom.xml" echo     ^<maven.compiler.source^>1.8^</maven.compiler.source^>
+>>"%P%\pom.xml" echo     ^<maven.compiler.target^>1.8^</maven.compiler.target^>
+>>"%P%\pom.xml" echo     ^<failOnMissingWebXml^>false^</failOnMissingWebXml^>
+>>"%P%\pom.xml" echo     ^<project.build.sourceEncoding^>UTF-8^</project.build.sourceEncoding^>
+>>"%P%\pom.xml" echo   ^</properties^>
+>>"%P%\pom.xml" echo   ^<dependencies^>
+>>"%P%\pom.xml" echo     ^<dependency^>
+>>"%P%\pom.xml" echo       ^<groupId^>javax^</groupId^>
+>>"%P%\pom.xml" echo       ^<artifactId^>javaee-web-api^</artifactId^>
+>>"%P%\pom.xml" echo       ^<version^>8.0^</version^>
+>>"%P%\pom.xml" echo       ^<scope^>provided^</scope^>
+>>"%P%\pom.xml" echo     ^</dependency^>
+>>"%P%\pom.xml" echo   ^</dependencies^>
+>>"%P%\pom.xml" echo   ^<build^>
+>>"%P%\pom.xml" echo     ^<finalName^>prac2c_session^</finalName^>
+>>"%P%\pom.xml" echo   ^</build^>
+>>"%P%\pom.xml" echo ^</project^>
+>"%P%\src\main\webapp\index.html" echo ^<!DOCTYPE html^>
+>>"%P%\src\main\webapp\index.html" echo ^<html^>
+>>"%P%\src\main\webapp\index.html" echo ^<head^>
+>>"%P%\src\main\webapp\index.html" echo   ^<title^>Using Session^</title^>
+>>"%P%\src\main\webapp\index.html" echo ^</head^>
+>>"%P%\src\main\webapp\index.html" echo ^<body^>
+>>"%P%\src\main\webapp\index.html" echo   ^<form action="Session" method="get"^>
+>>"%P%\src\main\webapp\index.html" echo      Enter User Id:
+>>"%P%\src\main\webapp\index.html" echo      ^<input type="text" name="txtName"^>
+>>"%P%\src\main\webapp\index.html" echo      ^<br^>^<br^>
+>>"%P%\src\main\webapp\index.html" echo      ^<input type="submit" value="Submit"^>
+>>"%P%\src\main\webapp\index.html" echo      ^<input type="reset" value="Reset"^>
+>>"%P%\src\main\webapp\index.html" echo   ^</form^>
+>>"%P%\src\main\webapp\index.html" echo ^</body^>
+>>"%P%\src\main\webapp\index.html" echo ^</html^>
+>"%P%\src\main\java\Session.java" echo import java.io.*;
+>>"%P%\src\main\java\Session.java" echo import javax.servlet.*;
+>>"%P%\src\main\java\Session.java" echo import javax.servlet.annotation.WebServlet;
+>>"%P%\src\main\java\Session.java" echo import javax.servlet.http.*;
+>>"%P%\src\main\java\Session.java" echo.
+>>"%P%\src\main\java\Session.java" echo @WebServlet("/Session")
+>>"%P%\src\main\java\Session.java" echo public class Session extends HttpServlet {
+>>"%P%\src\main\java\Session.java" echo     public void doGet(HttpServletRequest req, HttpServletResponse res)
+>>"%P%\src\main\java\Session.java" echo             throws IOException, ServletException {
+>>"%P%\src\main\java\Session.java" echo         res.setContentType("text/html");
+>>"%P%\src\main\java\Session.java" echo         PrintWriter out = res.getWriter();
+>>"%P%\src\main\java\Session.java" echo         out.println("<html><body>");
+>>"%P%\src\main\java\Session.java" echo         HttpSession hs = req.getSession(true);
+>>"%P%\src\main\java\Session.java" echo         if (hs.isNew()) {
+>>"%P%\src\main\java\Session.java" echo             String name = req.getParameter("txtName");
+>>"%P%\src\main\java\Session.java" echo             hs.setAttribute("uname", name);
+>>"%P%\src\main\java\Session.java" echo             hs.setAttribute("visit", "1");
+>>"%P%\src\main\java\Session.java" echo             out.println("<h2>Welcome First Time</h2>");
+>>"%P%\src\main\java\Session.java" echo         } else {
+>>"%P%\src\main\java\Session.java" echo             out.println("<h2>Welcome Again</h2>");
+>>"%P%\src\main\java\Session.java" echo             int visit = Integer.parseInt(
+>>"%P%\src\main\java\Session.java" echo                  (String) hs.getAttribute("visit")
+>>"%P%\src\main\java\Session.java" echo             ) + 1;
+>>"%P%\src\main\java\Session.java" echo             out.println("<h2>You visited " + visit + " times</h2>");
+>>"%P%\src\main\java\Session.java" echo             hs.setAttribute("visit", String.valueOf(visit));
+>>"%P%\src\main\java\Session.java" echo         }
+>>"%P%\src\main\java\Session.java" echo         out.println("<h2>Your Session Id " + hs.getId() + "</h2>");
+>>"%P%\src\main\java\Session.java" echo         out.println("<h2>You Logged in at "
+>>"%P%\src\main\java\Session.java" echo               + new java.util.Date(hs.getCreationTime())
+>>"%P%\src\main\java\Session.java" echo               + "</h2>");
+>>"%P%\src\main\java\Session.java" echo         out.println("<h2><a href=\"logoutServlet\">Click to LOGOUT</a></h2>");
+>>"%P%\src\main\java\Session.java" echo         out.println("</body></html>");
+>>"%P%\src\main\java\Session.java" echo     }
+>>"%P%\src\main\java\Session.java" echo }
+>"%P%\src\main\java\logoutServlet.java" echo import java.io.IOException;
+>>"%P%\src\main\java\logoutServlet.java" echo import java.io.PrintWriter;
+>>"%P%\src\main\java\logoutServlet.java" echo import javax.servlet.ServletException;
+>>"%P%\src\main\java\logoutServlet.java" echo import javax.servlet.annotation.WebServlet;
+>>"%P%\src\main\java\logoutServlet.java" echo import javax.servlet.http.*;
+>>"%P%\src\main\java\logoutServlet.java" echo.
+>>"%P%\src\main\java\logoutServlet.java" echo @WebServlet("/logoutServlet")
+>>"%P%\src\main\java\logoutServlet.java" echo public class logoutServlet extends HttpServlet {
+>>"%P%\src\main\java\logoutServlet.java" echo     public void doGet(HttpServletRequest req, HttpServletResponse res)
+>>"%P%\src\main\java\logoutServlet.java" echo             throws IOException, ServletException {
+>>"%P%\src\main\java\logoutServlet.java" echo         res.setContentType("text/html");
+>>"%P%\src\main\java\logoutServlet.java" echo         PrintWriter out = res.getWriter();
+>>"%P%\src\main\java\logoutServlet.java" echo         out.println("<html><body>");
+>>"%P%\src\main\java\logoutServlet.java" echo         HttpSession hs = req.getSession();
+>>"%P%\src\main\java\logoutServlet.java" echo         if (hs != null) {
+>>"%P%\src\main\java\logoutServlet.java" echo             hs.invalidate();
+>>"%P%\src\main\java\logoutServlet.java" echo         }
+>>"%P%\src\main\java\logoutServlet.java" echo         out.println("<h2>You are logout now...</h2>");
+>>"%P%\src\main\java\logoutServlet.java" echo         out.println("</body></html>");
+>>"%P%\src\main\java\logoutServlet.java" echo     }
+>>"%P%\src\main\java\logoutServlet.java" echo }
+cd /d "%P%"
+echo.
+echo Project created in %P%
+echo Now in NetBeans: File - Open Project - select this folder, then right-click - Run
+@echo on

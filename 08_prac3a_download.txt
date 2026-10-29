@@ -1,0 +1,69 @@
+@echo off
+set "ROOT=%USERPROFILE%\Desktop\AJT_Practicals"
+if exist "%USERPROFILE%\OneDrive\Desktop" set "ROOT=%USERPROFILE%\OneDrive\Desktop\AJT_Practicals"
+set "P=%ROOT%\prac3a_download"
+mkdir "%P%\src\main\webapp" 2>nul
+mkdir "%P%\src\main\java" 2>nul
+>"%P%\pom.xml" echo ^<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"^>
+>>"%P%\pom.xml" echo   ^<modelVersion^>4.0.0^</modelVersion^>
+>>"%P%\pom.xml" echo   ^<groupId^>com.bnn^</groupId^>
+>>"%P%\pom.xml" echo   ^<artifactId^>prac3a_download^</artifactId^>
+>>"%P%\pom.xml" echo   ^<version^>1.0^</version^>
+>>"%P%\pom.xml" echo   ^<packaging^>war^</packaging^>
+>>"%P%\pom.xml" echo   ^<properties^>
+>>"%P%\pom.xml" echo     ^<maven.compiler.source^>1.8^</maven.compiler.source^>
+>>"%P%\pom.xml" echo     ^<maven.compiler.target^>1.8^</maven.compiler.target^>
+>>"%P%\pom.xml" echo     ^<failOnMissingWebXml^>false^</failOnMissingWebXml^>
+>>"%P%\pom.xml" echo     ^<project.build.sourceEncoding^>UTF-8^</project.build.sourceEncoding^>
+>>"%P%\pom.xml" echo   ^</properties^>
+>>"%P%\pom.xml" echo   ^<dependencies^>
+>>"%P%\pom.xml" echo     ^<dependency^>
+>>"%P%\pom.xml" echo       ^<groupId^>javax^</groupId^>
+>>"%P%\pom.xml" echo       ^<artifactId^>javaee-web-api^</artifactId^>
+>>"%P%\pom.xml" echo       ^<version^>8.0^</version^>
+>>"%P%\pom.xml" echo       ^<scope^>provided^</scope^>
+>>"%P%\pom.xml" echo     ^</dependency^>
+>>"%P%\pom.xml" echo   ^</dependencies^>
+>>"%P%\pom.xml" echo   ^<build^>
+>>"%P%\pom.xml" echo     ^<finalName^>prac3a_download^</finalName^>
+>>"%P%\pom.xml" echo   ^</build^>
+>>"%P%\pom.xml" echo ^</project^>
+>"%P%\src\main\webapp\index.html" echo ^<!DOCTYPE html^>
+>>"%P%\src\main\webapp\index.html" echo ^<html^>
+>>"%P%\src\main\webapp\index.html" echo  ^<head^>
+>>"%P%\src\main\webapp\index.html" echo   ^<title^>Download File^</title^>
+>>"%P%\src\main\webapp\index.html" echo  ^</head^>
+>>"%P%\src\main\webapp\index.html" echo  ^<body^>
+>>"%P%\src\main\webapp\index.html" echo   ^<h2^>File Download^</h2^>
+>>"%P%\src\main\webapp\index.html" echo   ^<a href="download"^>Download the file^</a^>
+>>"%P%\src\main\webapp\index.html" echo  ^</body^>
+>>"%P%\src\main\webapp\index.html" echo ^</html^>
+>"%P%\src\main\java\download.java" echo import java.io.*;
+>>"%P%\src\main\java\download.java" echo import javax.servlet.*;
+>>"%P%\src\main\java\download.java" echo import javax.servlet.annotation.WebServlet;
+>>"%P%\src\main\java\download.java" echo import javax.servlet.http.*;
+>>"%P%\src\main\java\download.java" echo.
+>>"%P%\src\main\java\download.java" echo @WebServlet("/download")
+>>"%P%\src\main\java\download.java" echo public class download extends HttpServlet {
+>>"%P%\src\main\java\download.java" echo     public void doGet(HttpServletRequest req, HttpServletResponse res)
+>>"%P%\src\main\java\download.java" echo             throws IOException, ServletException {
+>>"%P%\src\main\java\download.java" echo         PrintWriter out = res.getWriter();
+>>"%P%\src\main\java\download.java" echo         String filename = "Practical6.txt";
+>>"%P%\src\main\java\download.java" echo         String filepath = "D:\\";
+>>"%P%\src\main\java\download.java" echo         res.setHeader(
+>>"%P%\src\main\java\download.java" echo               "Content-Disposition",
+>>"%P%\src\main\java\download.java" echo               "attachment; filename=" + filename
+>>"%P%\src\main\java\download.java" echo         );
+>>"%P%\src\main\java\download.java" echo         FileInputStream f = new FileInputStream(filepath + filename);
+>>"%P%\src\main\java\download.java" echo         int i;
+>>"%P%\src\main\java\download.java" echo         while ((i = f.read()) != -1) {
+>>"%P%\src\main\java\download.java" echo             out.write(i);
+>>"%P%\src\main\java\download.java" echo         }
+>>"%P%\src\main\java\download.java" echo         f.close();
+>>"%P%\src\main\java\download.java" echo     }
+>>"%P%\src\main\java\download.java" echo }
+cd /d "%P%"
+echo.
+echo Project created in %P%
+echo Now in NetBeans: File - Open Project - select this folder, then right-click - Run
+@echo on

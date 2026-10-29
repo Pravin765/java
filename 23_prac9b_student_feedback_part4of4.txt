@@ -1,0 +1,14 @@
+@echo off
+set "ROOT=%USERPROFILE%\Desktop\AJT_Practicals"
+if exist "%USERPROFILE%\OneDrive\Desktop" set "ROOT=%USERPROFILE%\OneDrive\Desktop\AJT_Practicals"
+set "P=%ROOT%\prac9b_student_feedback"
+echo --- Part 4 of 4 ---
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo             );
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo         }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo     }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo }
+cd /d "%P%"
+echo.
+echo Project created in %P%
+echo Now in NetBeans: File - Open Project - select this folder, then right-click - Run
+@echo on

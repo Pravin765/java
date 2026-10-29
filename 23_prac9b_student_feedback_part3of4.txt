@@ -1,0 +1,226 @@
+@echo off
+set "ROOT=%USERPROFILE%\Desktop\AJT_Practicals"
+if exist "%USERPROFILE%\OneDrive\Desktop" set "ROOT=%USERPROFILE%\OneDrive\Desktop\AJT_Practicals"
+set "P=%ROOT%\prac9b_student_feedback"
+echo --- Part 3 of 4 ---
+>>"%P%\src\main\webapp\css\style.css" echo footer {
+>>"%P%\src\main\webapp\css\style.css" echo     padding: 22px;
+>>"%P%\src\main\webapp\css\style.css" echo     text-align: center;
+>>"%P%\src\main\webapp\css\style.css" echo     background: #142d4e;
+>>"%P%\src\main\webapp\css\style.css" echo     color: white;
+>>"%P%\src\main\webapp\css\style.css" echo }
+>>"%P%\src\main\webapp\css\style.css" echo @media (max-width: 600px) {
+>>"%P%\src\main\webapp\css\style.css" echo     .navbar {
+>>"%P%\src\main\webapp\css\style.css" echo         padding: 18px;
+>>"%P%\src\main\webapp\css\style.css" echo     }
+>>"%P%\src\main\webapp\css\style.css" echo     nav {
+>>"%P%\src\main\webapp\css\style.css" echo         gap: 14px;
+>>"%P%\src\main\webapp\css\style.css" echo     }
+>>"%P%\src\main\webapp\css\style.css" echo     h1 {
+>>"%P%\src\main\webapp\css\style.css" echo         font-size: 28px;
+>>"%P%\src\main\webapp\css\style.css" echo     }
+>>"%P%\src\main\webapp\css\style.css" echo     .feedback-card {
+>>"%P%\src\main\webapp\css\style.css" echo         padding: 22px;
+>>"%P%\src\main\webapp\css\style.css" echo     }
+>>"%P%\src\main\webapp\css\style.css" echo }
+>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo /*
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo  * DATABASE SETUP (MySQL 5.5 command line)
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo  * 1. Open Command Prompt and run:  mysql -u root -p
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo  * 2. Execute these queries at the mysql^> prompt (run them once):
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo  *
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo  *   CREATE DATABASE IF NOT EXISTS studentfeedback;
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo  *   USE studentfeedback;
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo  *   CREATE TABLE IF NOT EXISTS feedback (id INT AUTO_INCREMENT PRIMARY KEY, student_name VARCHAR(100) NOT NULL,
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo  *      email VARCHAR(100) NOT NULL, course VARCHAR(50) NOT NULL, rating INT NOT NULL, message TEXT,
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo  *      submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo  *
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo  * 3. After running the application, check the data with:
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo  *   SELECT * FROM feedback;
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo  *
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo  * Connection string used in this project (hard coded):
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo  *   jdbc:mysql://localhost:3306/studentfeedback   user: root   password: system
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo  */
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo package com.studentfeedback;
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo import java.sql.Connection;
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo import java.sql.DriverManager;
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo import java.sql.SQLException;
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo public class DBConnection {
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo   private static final String URL =
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo   "jdbc:mysql://localhost:3306/studentfeedback?useSSL=false&serverTimezone=UTC";
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo   private static final String USER = "root";
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo   private static final String PASSWORD = "system";
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo   public static Connection getConnection() throws SQLException {
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo     try {
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo        Class.forName("com.mysql.jdbc.Driver");
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo     } catch (ClassNotFoundException e) {
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo        throw new SQLException("MySQL driver not found.", e);
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo         }
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo         return DriverManager.getConnection(URL, USER, PASSWORD);
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo     }
+>>"%P%\src\main\java\com\studentfeedback\DBConnection.java" echo }
+>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo package com.studentfeedback;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo import java.io.IOException;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo import java.sql.Connection;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo import java.sql.PreparedStatement;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo import java.sql.SQLException;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo import javax.servlet.ServletException;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo import javax.servlet.annotation.WebServlet;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo import javax.servlet.http.HttpServlet;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo import javax.servlet.http.HttpServletRequest;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo import javax.servlet.http.HttpServletResponse;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo @WebServlet("/FeedbackServlet")
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo public class FeedbackServlet extends HttpServlet {
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo     @Override
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo     protected void doPost(HttpServletRequest request,
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo                     HttpServletResponse response)
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo             throws ServletException, IOException {
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         request.setCharacterEncoding("UTF-8");
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         String name = request.getParameter("student_name");
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         String email = request.getParameter("email");
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         String course = request.getParameter("course");
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         String ratingText = request.getParameter("rating");
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         String message = request.getParameter("message");
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo     if (name == null ^|^| email == null ^|^| course == null
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo              ^|^| ratingText == null
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo              ^|^| name.trim().isEmpty()
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo              ^|^| email.trim().isEmpty()
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo              ^|^| course.trim().isEmpty()) {
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         response.sendError(
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo                HttpServletResponse.SC_BAD_REQUEST,
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo                "Please fill all required fields."
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         );
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         return;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo     }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo     int rating;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo     try {
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         rating = Integer.parseInt(ratingText);
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo     } catch (NumberFormatException e) {
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         response.sendError(
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo                HttpServletResponse.SC_BAD_REQUEST,
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo                "Invalid rating."
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         );
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         return;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo     }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo     if (rating ^< 1 ^|^| rating ^> 5
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo              ^|^| name.length() ^> 100
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo              ^|^| email.length() ^> 100
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo              ^|^| message != null ^&^& message.length() ^> 2000) {
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         response.sendError(
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo                HttpServletResponse.SC_BAD_REQUEST,
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo                "Please enter valid feedback details."
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         );
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         return;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo     }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo     String sql = "INSERT INTO feedback "
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo             + "(student_name, email, course, rating, message) "
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo             + "VALUES (?, ?, ?, ?, ?)";
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo     try (Connection con = DBConnection.getConnection();
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         PreparedStatement ps = con.prepareStatement(sql)) {
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         ps.setString(1, name.trim());
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         ps.setString(2, email.trim());
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         ps.setString(3, course);
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         ps.setInt(4, rating);
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         ps.setString(5, message == null ? "" : message.trim());
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         int rows = ps.executeUpdate();
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         if (rows ^> 0) {
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo             request.setAttribute("studentName", name.trim());
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo             request.setAttribute("success", true);
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo             request.getRequestDispatcher("/result.jsp")
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo                   .forward(request, response);
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         } else {
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo             response.sendError(
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo                    HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo                    "Feedback could not be saved."
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo             );
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo     } catch (SQLException e) {
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         log("Unable to save feedback.", e);
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         response.sendError(
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo                  HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo                  "Database error. Check database configuration."
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo              );
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo     }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo     @Override
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo     protected void doGet(HttpServletRequest request,
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo                        HttpServletResponse response)
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo              throws ServletException, IOException {
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         response.sendRedirect(
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo                   request.getContextPath() + "/feedback.html"
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo         );
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo     }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackServlet.java" echo }
+>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo package com.studentfeedback;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo import java.io.IOException;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo import java.sql.Connection;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo import java.sql.PreparedStatement;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo import java.sql.ResultSet;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo import java.sql.SQLException;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo import java.sql.Timestamp;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo import java.util.ArrayList;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo import java.util.List;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo import javax.servlet.ServletException;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo import javax.servlet.annotation.WebServlet;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo import javax.servlet.http.HttpServlet;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo import javax.servlet.http.HttpServletRequest;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo import javax.servlet.http.HttpServletResponse;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo @WebServlet("/FeedbackListServlet")
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo public class FeedbackListServlet extends HttpServlet {
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo   public static class Feedback {
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo      private int id;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo      private String name;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo      private String email;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo      private String course;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo      private int rating;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo      private String message;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo      private Timestamp submittedAt;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo      public Feedback(int id, String name, String email,
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo                 String course, int rating, String message,
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo                 Timestamp submittedAt) {
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo         this.id = id;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo           this.name = name;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo           this.email = email;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo           this.course = course;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo           this.rating = rating;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo           this.message = message;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo           this.submittedAt = submittedAt;
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo       }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo       public int getId() { return id; }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo       public String getName() { return name; }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo       public String getEmail() { return email; }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo       public String getCourse() { return course; }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo       public int getRating() { return rating; }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo       public String getMessage() { return message; }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo       public Timestamp getSubmittedAt() { return submittedAt; }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo   }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo   @Override
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo   protected void doGet(HttpServletRequest request,
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo                   HttpServletResponse response)
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo           throws ServletException, IOException {
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo       List^<Feedback^> feedbackList = new ArrayList^<^>();
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo       String sql = "SELECT id, student_name, email, course, "
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo             + "rating, message, submitted_at "
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo             + "FROM feedback ORDER BY id DESC";
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo       try (Connection con = DBConnection.getConnection();
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo           PreparedStatement ps = con.prepareStatement(sql);
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo           ResultSet rs = ps.executeQuery()) {
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo           while (rs.next()) {
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo             feedbackList.add(new Feedback(
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo                   rs.getInt("id"),
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo                          rs.getString("student_name"),
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo                          rs.getString("email"),
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo                          rs.getString("course"),
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo                          rs.getInt("rating"),
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo                          rs.getString("message"),
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo                          rs.getTimestamp("submitted_at")
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo                  ));
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo             }
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo             request.setAttribute("feedbackList", feedbackList);
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo             request.getRequestDispatcher("/feedback-list.jsp")
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo                    .forward(request, response);
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo         } catch (SQLException e) {
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo             log("Unable to retrieve feedback.", e);
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo             response.sendError(
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo                        HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+>>"%P%\src\main\java\com\studentfeedback\FeedbackListServlet.java" echo                        "Could not load feedback. Check database configuration."
+@echo on

@@ -1,0 +1,72 @@
+@echo off
+set "ROOT=%USERPROFILE%\Desktop\AJT_Practicals"
+if exist "%USERPROFILE%\OneDrive\Desktop" set "ROOT=%USERPROFILE%\OneDrive\Desktop\AJT_Practicals"
+set "P=%ROOT%\prac3a_upload"
+mkdir "%P%\src\main\webapp" 2>nul
+mkdir "%P%\src\main\java" 2>nul
+>"%P%\pom.xml" echo ^<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"^>
+>>"%P%\pom.xml" echo   ^<modelVersion^>4.0.0^</modelVersion^>
+>>"%P%\pom.xml" echo   ^<groupId^>com.bnn^</groupId^>
+>>"%P%\pom.xml" echo   ^<artifactId^>prac3a_upload^</artifactId^>
+>>"%P%\pom.xml" echo   ^<version^>1.0^</version^>
+>>"%P%\pom.xml" echo   ^<packaging^>war^</packaging^>
+>>"%P%\pom.xml" echo   ^<properties^>
+>>"%P%\pom.xml" echo     ^<maven.compiler.source^>1.8^</maven.compiler.source^>
+>>"%P%\pom.xml" echo     ^<maven.compiler.target^>1.8^</maven.compiler.target^>
+>>"%P%\pom.xml" echo     ^<failOnMissingWebXml^>false^</failOnMissingWebXml^>
+>>"%P%\pom.xml" echo     ^<project.build.sourceEncoding^>UTF-8^</project.build.sourceEncoding^>
+>>"%P%\pom.xml" echo   ^</properties^>
+>>"%P%\pom.xml" echo   ^<dependencies^>
+>>"%P%\pom.xml" echo     ^<dependency^>
+>>"%P%\pom.xml" echo       ^<groupId^>javax^</groupId^>
+>>"%P%\pom.xml" echo       ^<artifactId^>javaee-web-api^</artifactId^>
+>>"%P%\pom.xml" echo       ^<version^>8.0^</version^>
+>>"%P%\pom.xml" echo       ^<scope^>provided^</scope^>
+>>"%P%\pom.xml" echo     ^</dependency^>
+>>"%P%\pom.xml" echo     ^<dependency^>
+>>"%P%\pom.xml" echo       ^<groupId^>servlets.com^</groupId^>
+>>"%P%\pom.xml" echo       ^<artifactId^>cos^</artifactId^>
+>>"%P%\pom.xml" echo       ^<version^>05Nov2002^</version^>
+>>"%P%\pom.xml" echo     ^</dependency^>
+>>"%P%\pom.xml" echo   ^</dependencies^>
+>>"%P%\pom.xml" echo   ^<build^>
+>>"%P%\pom.xml" echo     ^<finalName^>prac3a_upload^</finalName^>
+>>"%P%\pom.xml" echo   ^</build^>
+>>"%P%\pom.xml" echo ^</project^>
+>"%P%\src\main\webapp\index.html" echo ^<html^>
+>>"%P%\src\main\webapp\index.html" echo  ^<head^>
+>>"%P%\src\main\webapp\index.html" echo   ^<title^>File Upload^</title^>
+>>"%P%\src\main\webapp\index.html" echo  ^</head^>
+>>"%P%\src\main\webapp\index.html" echo  ^<body^>
+>>"%P%\src\main\webapp\index.html" echo   ^<h2^>File Upload^</h2^>
+>>"%P%\src\main\webapp\index.html" echo   Select the file to upload:^<br^>
+>>"%P%\src\main\webapp\index.html" echo   ^<form action="uploadServlet" method="POST" enctype="multipart/form-data"^>
+>>"%P%\src\main\webapp\index.html" echo    ^<input type="file" name="file" size="50"^>^<br^>^<br^>
+>>"%P%\src\main\webapp\index.html" echo    ^<input type="submit" value="Upload File"^>
+>>"%P%\src\main\webapp\index.html" echo   ^</form^>
+>>"%P%\src\main\webapp\index.html" echo  ^</body^>
+>>"%P%\src\main\webapp\index.html" echo ^</html^>
+>"%P%\src\main\java\uploadServlet.java" echo import java.io.IOException;
+>>"%P%\src\main\java\uploadServlet.java" echo import java.io.PrintWriter;
+>>"%P%\src\main\java\uploadServlet.java" echo import javax.servlet.ServletException;
+>>"%P%\src\main\java\uploadServlet.java" echo import javax.servlet.annotation.WebServlet;
+>>"%P%\src\main\java\uploadServlet.java" echo import javax.servlet.http.HttpServlet;
+>>"%P%\src\main\java\uploadServlet.java" echo import javax.servlet.http.HttpServletRequest;
+>>"%P%\src\main\java\uploadServlet.java" echo import javax.servlet.http.HttpServletResponse;
+>>"%P%\src\main\java\uploadServlet.java" echo import com.oreilly.servlet.MultipartRequest;
+>>"%P%\src\main\java\uploadServlet.java" echo.
+>>"%P%\src\main\java\uploadServlet.java" echo @WebServlet("/uploadServlet")
+>>"%P%\src\main\java\uploadServlet.java" echo public class uploadServlet extends HttpServlet {
+>>"%P%\src\main\java\uploadServlet.java" echo     protected void doPost(HttpServletRequest request, HttpServletResponse response)
+>>"%P%\src\main\java\uploadServlet.java" echo             throws ServletException, IOException {
+>>"%P%\src\main\java\uploadServlet.java" echo         response.setContentType("text/html");
+>>"%P%\src\main\java\uploadServlet.java" echo         PrintWriter out = response.getWriter();
+>>"%P%\src\main\java\uploadServlet.java" echo         MultipartRequest m = new MultipartRequest(request, "D:\\");
+>>"%P%\src\main\java\uploadServlet.java" echo         out.print("<html><body><h2>Successfully Uploaded</h2></body></html>");
+>>"%P%\src\main\java\uploadServlet.java" echo     }
+>>"%P%\src\main\java\uploadServlet.java" echo }
+cd /d "%P%"
+echo.
+echo Project created in %P%
+echo Now in NetBeans: File - Open Project - select this folder, then right-click - Run
+@echo on
